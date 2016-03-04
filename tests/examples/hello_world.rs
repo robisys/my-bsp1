@@ -1,15 +1,16 @@
+// use util::{run_example, read_url};
+
+use std::{};
+use util::{run_example};
 
 
-fn t() {
-
-            let s = "Hello World";
-
-            assert_eq!(s, "Hello World");
-
-
+fn t(file: &str) {
+ let  a= file;
+  println!("hello: {:}", a);
+    run_example() 
+    
+    
 }
 
-#[test] fn non_macro() { t() }
+#[test] fn non_macro() { t("hello_world") }
 
-
-//#[test] fn _macro() { t("hello_world_macro") }
