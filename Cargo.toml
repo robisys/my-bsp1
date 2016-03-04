@@ -1,0 +1,16 @@
+[package] 
+name = "myprogram"
+version = "0.1.1"
+authors = ["robisys"]
+
+[[bin]]
+name = "myprog"
+path =  "src/myprog.rs"
+
+#[dependencies]
+#myprogs = {git = "https://github.com/robisys/myprogs.git"}
+
+
+
+
+
