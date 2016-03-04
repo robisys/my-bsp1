@@ -2,9 +2,10 @@
 //extern crate hyper;
 //#[macro_use] extern crate lazy_static;
 
-//mod util;
+mod util;
 
 mod examples {
+    mod hello_w;
     mod hello_world;
 
 }
