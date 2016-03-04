@@ -1,0 +1,15 @@
+language: rust 
+rust:
+     - stable
+     - nightly
+sudo: false
+env:
+  global:
+   - "FTP_USER=user"
+   - "FTP_PASSWORD=password"
+script: 
+     - cargo build
+     - cargo test
+
+after_success:
+    "echo 'success' > target/test.txt "
