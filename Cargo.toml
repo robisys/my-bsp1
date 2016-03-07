@@ -7,7 +7,7 @@ authors = ["robisys"]
 name = "myprog"
 path =  "src/myprog.rs"
 
-#[dependencies]
+[dependencies]
 #myprogs = {git = "https://github.com/robisys/myprogs.git"}
 nickel = "*"
 hyper  = "*"
