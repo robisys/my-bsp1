@@ -1,14 +1,15 @@
-fn main () {
+/*
+main () {
 println!("Hello");
 }
+*/
 
-/*
 
 #[macro_use] extern crate nickel;
-//extern crate hyper;
+extern crate hyper;
 
 use nickel::{Nickel, HttpRouter};
-//use hyper::method::Method;
+use hyper::method::Method;
 
 fn main() {
     let mut server = Nickel::new();
@@ -59,4 +60,4 @@ fn explicit_router() -> nickel::Router {
 
     router
 }
-*/
+
