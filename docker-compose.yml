@@ -1,0 +1,76 @@
+version: "2"
+services:
+  nginx:
+    image: prooph/nginx:www
+    ports:
+      - "8085:80"
+      - "443:443"
+    links:
+      - php:php
+    volumes_from:
+      - dataphp
+
+  php:
+    image: prooph/php:7.0-fpm
+    links:
+      - mariadb:mariadb
+    volumes_from:
+      - dataphp
+
+  dataphp:
+    image: debian:jessie
+    volumes:
+      - wwwdata:/var/www
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    #container_name: phpmyadmin
+    environment:
+       - PMA_ARBITRARY=1
+    restart: always
+    ports:
+       - 8086:80
+    volumes_from:
+       - dataphpmyadmin
+     
+  dataphpmyadmin:
+    image: debian:jessie
+    volumes:
+       - /sessions
+       - phpmyadmin:/etc/phpmyadmin
+       #/etc/phpadmin/config.user.inc.php
+
+  mariadb:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=dev
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev
+      - MYSQL_DATABASE=prooph
+    
+    volumes_from:
+       - datamariadb  
+  
+  datamariadb:
+    image: debian:jessie
+    volumes:
+       - dbdata:/var/lib/mysql
+
+volumes: 
+  dbdata:                       # Kompositions-interner Bezeichner (s. services:*:volumes)
+    external:
+      name: robichat-dbdata   # Systemweiter Bezeichner (s. zuvor docker volume create)
+  wwwdata:
+    external:
+      name: robichat-wwwdata        
+  phpmyadmin:
+    external:
+      name: robichat-phpmyadmindata
+
+
+         
+      
+                   
