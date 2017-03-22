@@ -1,15 +1,30 @@
-language: rust 
-rust:
-     - stable
-     - nightly
-sudo: false
-env:
-  global:
-   - "FTP_USER=user"
-   - "FTP_PASSWORD=password"
-script: 
-     - cargo build
-#     - cargo test
+#sudo: required
+language: python
+python:
+  - 2.7
 
-after_success:
-    "echo 'success' > target/test.txt "
+services:
+  - docker
+  
+
+install:
+  #- docker build -t blog .
+  #- docker run -d -p 127.0.0.1:80:80 --name blog blog
+  - docker-compose  up  -d
+  #- docker-compose -f mybsp1/docker-compose.yml up  -d
+  #- docker-compose -f mybsp2/docker-compose.yml up  -d 
+  #- docker-compose -f mybsp3/docker-compose.yml up  -d
+
+before_script:
+  #- pip install -r requirements.txt
+  #- pip install mock
+  #- pip install requests
+  #- pip install feedparser
+
+script:
+  - docker ps 
+  #- python tests.py
+  #- ./test.sh
+  
+after_script:
+- docker-compose down
