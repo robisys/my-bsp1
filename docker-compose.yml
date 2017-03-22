@@ -29,6 +29,8 @@ services:
     environment:
        - PMA_ARBITRARY=1
     restart: always
+    links:
+      - mariadb:mariadb
     ports:
        - 8086:80
     volumes_from:
@@ -38,13 +40,13 @@ services:
     image: debian:jessie
     volumes:
        - /sessions
-       - phpmyadmin:/etc/phpmyadmin
+       - ./phpmyadmin:/etc/phpmyadmin
        #/etc/phpadmin/config.user.inc.php
 
   mariadb:
     image: mariadb
-    ports:
-      - "3306:3306"
+ #   ports:
+ #     - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=dev
       - MYSQL_USER=dev
@@ -57,18 +59,18 @@ services:
   datamariadb:
     image: debian:jessie
     volumes:
-       - dbdata:/var/lib/mysql
+       - ./dbdata:/var/lib/mysql
 
-volumes: 
-  dbdata:                       # Kompositions-interner Bezeichner (s. services:*:volumes)
-    external:
-      name: robichat-dbdata   # Systemweiter Bezeichner (s. zuvor docker volume create)
-  wwwdata:
-    external:
-      name: robichat-wwwdata        
-  phpmyadmin:
-    external:
-      name: robichat-phpmyadmindata
+#volumes: 
+#  dbdata:                       # Kompositions-interner Bezeichner (s. services:*:volumes)
+#    external:
+#      name: robichat-dbdata   # Systemweiter Bezeichner (s. zuvor docker volume create)
+#  wwwdata:
+#    external:
+#      name: robichat-wwwdata        
+#  phpmyadmin:
+#    external:
+#      name: robichat-phpmyadmindata
 
 
          
